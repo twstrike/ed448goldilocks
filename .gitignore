@@ -25,3 +25,4 @@ ltmain.sh
 missing
 stamp-h1
 **/.deps
+pkgconfig/libdecaf.pc

@@ -1,6 +1,6 @@
 include $(top_srcdir)/variables.am
 
-SUBDIRS = src test
+SUBDIRS = src test pkgconfig
 ACLOCAL_AMFLAGS = -I m4
 
 .PHONY: gen_code

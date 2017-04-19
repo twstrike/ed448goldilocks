@@ -46,5 +46,5 @@ AC_CHECK_TYPES([ptrdiff_t])
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([gettimeofday memmove memset pow sqrt])
 
-AC_CONFIG_FILES([Makefile src/Makefile test/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile test/Makefile pkgconfig/Makefile])
 AC_OUTPUT
