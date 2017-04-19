@@ -412,6 +412,11 @@ void decaf_x448_generate_key (
     const uint8_t scalar[DECAF_X448_PRIVATE_BYTES]
 ) API_VIS NONNULL NOINLINE;
 
+void decaf_448_point_to_X448 (
+    uint8_t out[DECAF_X448_PUBLIC_BYTES],
+    const decaf_448_point_t pt
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t decaf_448_encode_like_curve448) */
 
 /**

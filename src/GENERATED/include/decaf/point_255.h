@@ -412,6 +412,11 @@ void decaf_x25519_generate_key (
     const uint8_t scalar[DECAF_X25519_PRIVATE_BYTES]
 ) API_VIS NONNULL NOINLINE;
 
+void decaf_255_point_to_X25519 (
+    uint8_t out[DECAF_X25519_PUBLIC_BYTES],
+    const decaf_255_point_t pt
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t decaf_255_encode_like_curve25519) */
 
 /**
