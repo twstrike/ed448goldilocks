@@ -402,6 +402,11 @@ void $(c_ns)_point_to_X$(gf_shortname) (
     const $(c_ns)_point_t pt
 ) API_VIS NONNULL NOINLINE;
 
+void $(c_ns)_X$(gf_shortname)_to_point (
+    $(c_ns)_point_t out,
+    const uint8_t in[DECAF_X$(gf_shortname)_PUBLIC_BYTES]
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t $(c_ns)_encode_like_curve$(gf_shortname)) */
 
 /**
