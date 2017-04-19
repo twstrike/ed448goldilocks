@@ -1310,6 +1310,31 @@ decaf_error_t decaf_x$(gf_shortname) (
     return decaf_succeed_if(mask_to_bool(nz));
 }
 
+static void isogenize_to_montgomery(
+    point_t p
+) {
+    /* Isogenize to Montgomery curve */
+    gf_invert(p->t,p->x); /* 1/x */
+    gf_mul(p->z,p->t,p->y); /* y/x */
+    gf_sqr(p->y,p->z); /* (y/x)^2 */
+#if IMAGINE_TWIST
+    gf_sub(p->y,ZERO,p->y);
+#endif
+}
+
+void API_NS(point_to_X$(gf_shortname)) (
+    uint8_t out[X_PUBLIC_BYTES],
+    const point_t in
+) {
+    point_t p;
+    API_NS(point_copy)(p, in);
+
+    isogenize_to_montgomery(p);
+    gf_serialize(out,p->y,1);
+
+    API_NS(point_destroy)(p);
+}
+
 void decaf_x$(gf_shortname)_generate_key (
     uint8_t out[X_PUBLIC_BYTES],
     const uint8_t scalar[X_PRIVATE_BYTES]
@@ -1340,14 +1365,8 @@ void decaf_x$(gf_shortname)_generate_key (
     API_NS(scalar_halve)(the_scalar,the_scalar);
     point_t p;
     API_NS(precomputed_scalarmul)(p,API_NS(precomputed_base),the_scalar);
-    
-    /* Isogenize to Montgomery curve */
-    gf_invert(p->t,p->x); /* 1/x */
-    gf_mul(p->z,p->t,p->y); /* y/x */
-    gf_sqr(p->y,p->z); /* (y/x)^2 */
-#if IMAGINE_TWIST
-    gf_sub(p->y,ZERO,p->y);
-#endif
+   
+    isogenize_to_montgomery(p);
     gf_serialize(out,p->y,1);
         
     decaf_bzero(scalar2,sizeof(scalar2));

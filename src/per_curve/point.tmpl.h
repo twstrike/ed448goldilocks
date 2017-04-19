@@ -397,6 +397,11 @@ void decaf_x$(gf_shortname)_generate_key (
     const uint8_t scalar[DECAF_X$(gf_shortname)_PRIVATE_BYTES]
 ) API_VIS NONNULL NOINLINE;
 
+void $(c_ns)_point_to_X$(gf_shortname) (
+    uint8_t out[DECAF_X$(gf_shortname)_PUBLIC_BYTES],
+    const $(c_ns)_point_t pt
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t $(c_ns)_encode_like_curve$(gf_shortname)) */
 
 /**
