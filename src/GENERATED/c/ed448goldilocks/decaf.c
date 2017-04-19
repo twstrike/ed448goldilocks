@@ -1346,6 +1346,16 @@ void API_NS(point_to_X448) (
     API_NS(point_destroy)(p);
 }
 
+void API_NS(X448_to_point) (
+    point_t out,
+    const uint8_t in[X_PUBLIC_BYTES]
+) {
+    (void) out;
+    (void) in;
+
+    return; // TODO
+}
+
 void decaf_x448_generate_key (
     uint8_t out[X_PUBLIC_BYTES],
     const uint8_t scalar[X_PRIVATE_BYTES]

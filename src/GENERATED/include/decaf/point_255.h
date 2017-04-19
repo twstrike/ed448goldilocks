@@ -417,6 +417,11 @@ void decaf_255_point_to_X25519 (
     const decaf_255_point_t pt
 ) API_VIS NONNULL NOINLINE;
 
+void decaf_255_X25519_to_point (
+    decaf_255_point_t out,
+    const uint8_t in[DECAF_X25519_PUBLIC_BYTES]
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t decaf_255_encode_like_curve25519) */
 
 /**

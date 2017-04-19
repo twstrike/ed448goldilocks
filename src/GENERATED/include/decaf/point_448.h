@@ -417,6 +417,11 @@ void decaf_448_point_to_X448 (
     const decaf_448_point_t pt
 ) API_VIS NONNULL NOINLINE;
 
+void decaf_448_X448_to_point (
+    decaf_448_point_t out,
+    const uint8_t in[DECAF_X448_PUBLIC_BYTES]
+) API_VIS NONNULL NOINLINE;
+
 /* FUTURE: uint8_t decaf_448_encode_like_curve448) */
 
 /**
