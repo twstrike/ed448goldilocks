@@ -26,6 +26,11 @@ $("extern const uint8_t * const DECAF_ED" + gf_shortname + "_NO_CONTEXT API_VIS;
 #define decaf_ed$(gf_shortname)_prehash_update  decaf_$(eddsa_hash)_update
 #define decaf_ed$(gf_shortname)_prehash_destroy decaf_$(eddsa_hash)_destroy
 
+void decaf_ed$(gf_shortname)_derive_secret_scalar (
+    $(c_ns)_scalar_t secret,
+    const uint8_t privkey[DECAF_EDDSA_$(gf_shortname)_PRIVATE_BYTES]
+) API_VIS NONNULL NOINLINE;
+
 /**
  * @brief EdDSA key generation.  This function uses a different (non-Decaf)
  * encoding.
