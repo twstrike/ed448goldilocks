@@ -89,8 +89,8 @@ void decaf_ed448_prehash_init (
     hash_init(hash);
 }
 
-void decaf_ed448_derive_public_key (
-    uint8_t pubkey[DECAF_EDDSA_448_PUBLIC_BYTES],
+void decaf_ed448_derive_secret_scalar (
+    API_NS(scalar_t) secret,
     const uint8_t privkey[DECAF_EDDSA_448_PRIVATE_BYTES]
 ) {
     /* only this much used for keygen */
@@ -104,9 +104,8 @@ void decaf_ed448_derive_public_key (
     );
     clamp(secret_scalar_ser);
         
-    API_NS(scalar_t) secret_scalar;
-    API_NS(scalar_decode_long)(secret_scalar, secret_scalar_ser, sizeof(secret_scalar_ser));
-    
+    API_NS(scalar_decode_long)(secret, secret_scalar_ser, sizeof(secret_scalar_ser));
+
     /* Since we are going to mul_by_cofactor during encoding, divide by it here.
      * However, the EdDSA base point is not the same as the decaf base point if
      * the sigma isogeny is in use: the EdDSA base point is on Etwist_d/(1-d) and
@@ -114,8 +113,18 @@ void decaf_ed448_derive_public_key (
      * picks up a factor of 2 from the isogenies.  So we might start at 2 instead of 1. 
      */
     for (unsigned int c = EDDSA_BASE_POINT_RATIO; c < COFACTOR; c <<= 1) {
-        API_NS(scalar_halve)(secret_scalar,secret_scalar);
+        API_NS(scalar_halve)(secret,secret);
     }
+    
+    decaf_bzero(secret_scalar_ser, sizeof(secret_scalar_ser));
+}
+
+void decaf_ed448_derive_public_key (
+    uint8_t pubkey[DECAF_EDDSA_448_PUBLIC_BYTES],
+    const uint8_t privkey[DECAF_EDDSA_448_PRIVATE_BYTES]
+) {
+    API_NS(scalar_t) secret_scalar;
+    decaf_ed448_derive_secret_scalar(secret_scalar, privkey);
     
     API_NS(point_t) p;
     API_NS(precomputed_scalarmul)(p,API_NS(precomputed_base),secret_scalar);
@@ -125,7 +134,6 @@ void decaf_ed448_derive_public_key (
     /* Cleanup */
     API_NS(scalar_destroy)(secret_scalar);
     API_NS(point_destroy)(p);
-    decaf_bzero(secret_scalar_ser, sizeof(secret_scalar_ser));
 }
 
 void decaf_ed448_sign (

@@ -41,6 +41,11 @@ extern "C" {
 #define decaf_ed448_prehash_update  decaf_shake256_update
 #define decaf_ed448_prehash_destroy decaf_shake256_destroy
 
+void decaf_ed448_derive_secret_scalar (
+    decaf_448_scalar_t secret,
+    const uint8_t privkey[DECAF_EDDSA_448_PRIVATE_BYTES]
+) API_VIS NONNULL NOINLINE;
+
 /**
  * @brief EdDSA key generation.  This function uses a different (non-Decaf)
  * encoding.
