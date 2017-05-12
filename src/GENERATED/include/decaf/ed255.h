@@ -42,6 +42,11 @@ extern const uint8_t * const DECAF_ED25519_NO_CONTEXT DECAF_API_VIS;
 #define decaf_ed25519_prehash_update  decaf_sha512_update
 #define decaf_ed25519_prehash_destroy decaf_sha512_destroy
 
+void decaf_ed25519_derive_secret_scalar (
+    decaf_255_scalar_t secret,
+    const uint8_t privkey[DECAF_EDDSA_25519_PRIVATE_BYTES]
+) DECAF_API_VIS DECAF_NONNULL DECAF_NOINLINE;
+
 /**
  * @brief EdDSA key generation.  This function uses a different (non-Decaf)
  * encoding.
