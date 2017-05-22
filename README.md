@@ -3,6 +3,15 @@
 This library is for elliptic curve research and practical application.
 It currently supports Ed448-Goldilocks and Curve25519.
 
+## Installation
+
+```
+$ autoreconf --install
+$ ./configure
+$ make
+$ sudo make install
+```
+
 ## Mailing lists
 
 Because this is new software, please expect it to have bugs, perhaps
