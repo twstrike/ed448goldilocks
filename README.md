@@ -9,7 +9,7 @@ It currently supports Ed448-Goldilocks and Curve25519.
 $ autoreconf --install
 $ ./configure
 $ make
-$ sudo make install
+$ make install
 ```
 
 ## Mailing lists
