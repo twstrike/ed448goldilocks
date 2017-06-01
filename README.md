@@ -6,7 +6,7 @@ It currently supports Ed448-Goldilocks and Curve25519.
 ## Installation
 
 ```
-$ autoreconf --install
+$ autoreconf -iv
 $ ./configure
 $ make
 $ make install
