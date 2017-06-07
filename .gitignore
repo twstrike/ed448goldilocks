@@ -25,4 +25,11 @@ ltmain.sh
 missing
 stamp-h1
 **/.deps
+**/.libs
 pkgconfig/libdecaf.pc
+
+src/decaf_gen_tables_curve25519
+src/decaf_gen_tables_ed448goldilocks
+test/test
+test/test_bench
+
